@@ -125,137 +125,153 @@ export default function ReportLostPet() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-            🚨 Report Lost Pet
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900/20 to-gray-900 py-12">
+      <div className="max-w-3xl mx-auto px-4">
+        <div className="bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-700 p-8">
+          <div className="text-center mb-8">
+            <div className="text-5xl mb-4 animate-pulse">🚨</div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent mb-4">
+              Report Lost Pet
+            </h1>
+            <p className="text-gray-300 text-lg">Help us reunite your beloved pet with you</p>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
             {/* Pet Information */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="bg-gray-700/50 rounded-xl p-6 border border-gray-600">
+              <h3 className="text-xl font-semibold text-blue-400 mb-6">Pet Information</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
+                    Pet Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.petName}
+                    onChange={(e) => setFormData(prev => ({ ...prev, petName: e.target.value }))}
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
+                    placeholder="Enter your pet's name"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
+                    Pet Type *
+                  </label>
+                  <select
+                    required
+                    value={formData.petType}
+                    onChange={(e) => setFormData(prev => ({ ...prev, petType: e.target.value as 'dog' | 'cat' | 'other' }))}
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white transition-all duration-200"
+                  >
+                    <option value="dog">🐕 Dog</option>
+                    <option value="cat">🐱 Cat</option>
+                    <option value="other">🐾 Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
+                    Breed
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.breed}
+                    onChange={(e) => setFormData(prev => ({ ...prev, breed: e.target.value }))}
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
+                    placeholder="e.g., Golden Retriever"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
+                    Size *
+                  </label>
+                  <select
+                    required
+                    value={formData.size}
+                    onChange={(e) => setFormData(prev => ({ ...prev, size: e.target.value as 'small' | 'medium' | 'large' }))}
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white transition-all duration-200"
+                  >
+                    <option value="small">🐕‍🦺 Small (under 25 lbs)</option>
+                    <option value="medium">🐕 Medium (25-60 lbs)</option>
+                    <option value="large">🦮 Large (over 60 lbs)</option>
+                  </select>
+                </div>
+              </div>
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Pet Name *
+                <label className="block text-sm font-medium text-gray-300 mb-3">
+                  Color/Markings *
                 </label>
                 <input
                   type="text"
                   required
-                  value={formData.petName}
-                  onChange={(e) => setFormData(prev => ({ ...prev, petName: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={formData.color}
+                  onChange={(e) => setFormData(prev => ({ ...prev, color: e.target.value }))}
+                  placeholder="e.g., Brown with white chest"
+                  className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Pet Type *
+                <label className="block text-sm font-medium text-gray-300 mb-3">
+                  Description *
                 </label>
-                <select
+                <textarea
                   required
-                  value={formData.petType}
-                  onChange={(e) => setFormData(prev => ({ ...prev, petType: e.target.value as 'dog' | 'cat' | 'other' }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="dog">Dog</option>
-                  <option value="cat">Cat</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Breed
-                </label>
-                <input
-                  type="text"
-                  value={formData.breed}
-                  onChange={(e) => setFormData(prev => ({ ...prev, breed: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  rows={4}
+                  value={formData.description}
+                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  placeholder="Describe your pet's appearance, personality, any special markings..."
+                  className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200 resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Size *
+                <label className="block text-sm font-medium text-gray-300 mb-3">
+                  Pet Photo
                 </label>
-                <select
-                  required
-                  value={formData.size}
-                  onChange={(e) => setFormData(prev => ({ ...prev, size: e.target.value as 'small' | 'medium' | 'large' }))}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <option value="small">Small (under 25 lbs)</option>
-                  <option value="medium">Medium (25-60 lbs)</option>
-                  <option value="large">Large (over 60 lbs)</option>
-                </select>
+                <div className="relative">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setFormData(prev => ({ 
+                      ...prev, 
+                      imageFile: e.target.files?.[0] || null 
+                    }))}
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-500 file:text-white hover:file:bg-blue-600 transition-all duration-200"
+                  />
+                  <p className="text-gray-400 text-sm mt-2">📸 Upload a clear photo to help identify your pet</p>
+                </div>
               </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Color/Markings *
-              </label>
-              <input
-                type="text"
-                required
-                value={formData.color}
-                onChange={(e) => setFormData(prev => ({ ...prev, color: e.target.value }))}
-                placeholder="e.g., Brown with white chest"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Description *
-              </label>
-              <textarea
-                required
-                rows={4}
-                value={formData.description}
-                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                placeholder="Describe your pet's appearance, personality, any special markings..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Pet Photo
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => setFormData(prev => ({ 
-                  ...prev, 
-                  imageFile: e.target.files?.[0] || null 
-                }))}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
             </div>
 
             {/* Location Information */}
-            <div className="border-t pt-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Last Seen Location
+            <div className="bg-gray-700/50 rounded-xl p-6 border border-gray-600">
+              <h3 className="text-xl font-semibold text-orange-400 mb-6">
+                📍 Last Seen Location
               </h3>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <button
                   type="button"
                   onClick={handleLocationDetection}
                   disabled={loading}
-                  className="bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
                 >
-                  📍 Use My Current Location
+                  <span className="flex items-center gap-2">
+                    <span className="text-lg">📍</span>
+                    Use My Current Location
+                  </span>
                 </button>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
                     Address/Description *
                   </label>
                   <input
@@ -264,12 +280,12 @@ export default function ReportLostPet() {
                     value={formData.lastSeenLocation}
                     onChange={(e) => setFormData(prev => ({ ...prev, lastSeenLocation: e.target.value }))}
                     placeholder="Where was your pet last seen?"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
                     Date Last Seen *
                   </label>
                   <input
@@ -277,21 +293,21 @@ export default function ReportLostPet() {
                     required
                     value={formData.lastSeenDate}
                     onChange={(e) => setFormData(prev => ({ ...prev, lastSeenDate: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white transition-all duration-200"
                   />
                 </div>
               </div>
             </div>
 
             {/* Contact Information */}
-            <div className="border-t pt-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Contact Information
+            <div className="bg-gray-700/50 rounded-xl p-6 border border-gray-600">
+              <h3 className="text-xl font-semibold text-green-400 mb-6">
+                📞 Contact Information
               </h3>
 
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
                     Your Name *
                   </label>
                   <input
@@ -299,12 +315,13 @@ export default function ReportLostPet() {
                     required
                     value={formData.contactName}
                     onChange={(e) => setFormData(prev => ({ ...prev, contactName: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your full name"
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
                     Email *
                   </label>
                   <input
@@ -312,20 +329,23 @@ export default function ReportLostPet() {
                     required
                     value={formData.contactEmail}
                     onChange={(e) => setFormData(prev => ({ ...prev, contactEmail: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="your.email@example.com"
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
                     Phone Number
                   </label>
                   <input
                     type="tel"
                     value={formData.contactPhone}
                     onChange={(e) => setFormData(prev => ({ ...prev, contactPhone: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="(555) 123-4567"
+                    className="w-full px-4 py-3 bg-gray-600 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 transition-all duration-200"
                   />
+                  <p className="text-gray-400 text-sm mt-2">💡 Optional, but helps people contact you quickly</p>
                 </div>
               </div>
             </div>
@@ -333,9 +353,19 @@ export default function ReportLostPet() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-400 text-white font-semibold py-3 rounded-lg transition-colors text-lg"
+              className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold py-4 rounded-xl transition-all duration-300 text-lg shadow-2xl hover:shadow-red-500/25 hover:scale-105 transform disabled:hover:scale-100"
             >
-              {loading ? 'Posting Alert...' : '🚨 Post Lost Pet Alert'}
+              {loading ? (
+                <span className="flex items-center justify-center gap-3">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                  Posting Alert...
+                </span>
+              ) : (
+                <span className="flex items-center justify-center gap-3">
+                  <span className="text-xl">🚨</span>
+                  Post Lost Pet Alert
+                </span>
+              )}
             </button>
           </form>
         </div>
