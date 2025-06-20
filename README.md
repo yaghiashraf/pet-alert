@@ -134,3 +134,6 @@ npm start
 ---
 
 Built with ❤️ for reuniting pets with their families.
+
+## 🌙 Dark Mode Update
+Beautiful dark theme with stunning animations and modern UI!
