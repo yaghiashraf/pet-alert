@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+// Dark Mode UI - Version 2.0 - Force rebuild
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
